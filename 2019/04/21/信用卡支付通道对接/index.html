@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="吕帅鹏的博客">
+    <meta name="keyword"  content="PHP">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        信用卡支付通道对接.md - 帅鹏的博客 | Shuaipeng&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>Shuaipeng Lv</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archive">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#业务流程说明："><span class="toc-text">业务流程说明：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#业务处理："><span class="toc-text">业务处理：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#backUrl"><span class="toc-text">backUrl</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#noticeUrl"><span class="toc-text">noticeUrl</span></a></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        信用卡支付通道对接.md
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-04-21 11:09:37</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#支付接口" title="支付接口">支付接口</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <p>一些跨境电商独立站等基本都会有国际信用卡收款通道的接入</p>
+<p>收款通道的接入基本千篇一律</p>
+<p>拿钱海支付（oceanpayment）举个例子</p>
+<h4 id="业务流程说明："><a href="#业务流程说明：" class="headerlink" title="业务流程说明："></a>业务流程说明：</h4><p>（1）消费者在网站下单。 </p>
+<p>（2）网站提交订单信息到 Oceanpayment支付系统。 </p>
+<p>（3）Oceanpayment 支付系统进行参数校验，校验参数是否合法。 </p>
+<p>（4）Oceanpayment 支付系统返回参数异常订单信息给网站。 </p>
+<p>（5）向用户展示订单结果。 </p>
+<p>（6）如果（3）校验通过，向用户展示信用卡填写页面。 </p>
+<p>（7）消费者填写信用卡号等信息。 </p>
+<p>（8）Oceanpayment 风控系统进行判断订单风险。 </p>
+<p>（9）Oceanpayment 支付系统返回高风险订单信息给网站。 </p>
+<p>（10）向用户展示订单结果。 </p>
+<p>（11）如果（8）校验通过，Oceanpayment 支付系统将该笔订单扣款请求发送至银行。 </p>
+<p>（12）银行处理该笔付款请求，返回支付结果。 </p>
+<p>（13）Oceanpayment 支付系统返回支付结果给网站。 </p>
+<p>（14）Oceanpayment 支付系统通过异步消息通知网站支付结果。 </p>
+<p>（15）网站响应 receive-ok字符告知异步消息接收情况。 </p>
+<p>（16）未收到支付通知的情况下，调用Oceanpayment 对账 API【本文档C部分】，查询最新的订单状态。</p>
+<p>（17）Oceanpayment 对账 API返回订单支付结果。 </p>
+<p>（18）向用户展示订单支付结果。 </p>
+<p>（19）如果支付成功则安排发货。</p>
+<p>以上是钱海通道流程，我们要做的就是提交信息到支付系统，支付系统会返回信息到我们提交的backUrl（用于浏览器跳转）和noticeUrl（异步发送到服务器，也是我们处理订单的地方）</p>
+<p>提交给支付系统的信息和支付系统返回的信息中会带有一个加密字符串，用于验证安全性，加密规则根据支付通道规定来加密</p>
+<h4 id="业务处理："><a href="#业务处理：" class="headerlink" title="业务处理："></a>业务处理：</h4><h5 id="backUrl"><a href="#backUrl" class="headerlink" title="backUrl"></a>backUrl</h5><p>backUrl用于支付之后跳转到商户网站</p>
+<p>在backUrl方法中收到返回信息，首先通过加密规则对返回信息加密，和返回的加密字符串对比 ，如果一致则进行之后的处理</p>
+<p>返回信息中会有订单状态，根据状态渲染支付成功或失败页面给用户</p>
+<h5 id="noticeUrl"><a href="#noticeUrl" class="headerlink" title="noticeUrl"></a>noticeUrl</h5><p>noticeUrl 用于支付之后对商户订单的处理</p>
+<p>跟backUrl一样，验证秘匙和支付状态，支付成功则修改商户订单的支付状态，然后返回支付系统“receive-ok”字符告知支付系统已经收到信息</p>
+<p>如此便大功告成</p>
+<p>如果是一些开源商户建站系统，如WordPress，zenCart，shopify等等这些，支付的接入会比较方便，基本都有集成的插件，只要安装插件之后填写支付通道开户后的商家私匙和秘匙就可以了</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud" target="_blank" rel="noopener">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <script>
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+        */
+        if( '' || '')
+        var disqus_config = function () {
+            this.page.url = '';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = ''; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://airclouds-blog.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+
+
+
+</html>
